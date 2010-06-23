@@ -1,0 +1,12 @@
+lib/octant/item.rb beb4e37969dd7514a4589cc514f32ab3f03076cb
+LICENSE f1bb7edce4a9a132c30b46a4f008286d8d95c912
+features/static_url.feature 17d717a06720f875293bace657fdedf1f2f585fe
+lib/octant/version.rb 7ebb3199adeee53fa5f14f1ec6342271e1f04f3f
+lib/octant/navigation.rb d092e6305ef10dff2dc95a7180049397f9639c3c
+lib/octant/formatters.rb 1425bddf55dce942dc119d1afa20327839bfc893
+features/title.feature 081c56a6f1a151c3c09d9315f9a6c380a93153c0
+lib/octant.rb 79c554678301d2b34a4140cddb26897a5f285a79
+lib/octant/formatters/base.rb 790ed0ec02eaaea5ed66187fd211ae76797ea8fa
+lib/octant/builders/item.rb fa20ac7026cca563ecc31e574f01ef36e60acc52
+lib/octant/builders/navigation.rb f464873df8231d8164c3e57d7d4f1ad349db4481
+lib/octant/builders.rb dd7f02f3bfa246d2d601430072c429d0b16519d3
