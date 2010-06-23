@@ -9,9 +9,12 @@ module Octant
       #
       # @param [Kin::Nav::Menu] nav
       #   An instance of a Menu to be rendered as HTML.
+      # @param [Hash] options
+      #   Options used to customise the formatter.
       #
-      def initialize(nav)
+      def initialize(nav, options)
         @nav = nav
+        @guards = options.fetch(:guard, {})
       end
 
       # Transforms the menu given to +initialize+ into a string containing
@@ -23,7 +26,7 @@ module Octant
       #
       def to_html
         tag(:ul, @nav.items.map do |item|
-          trasform_item_to_html(item)
+          trasform_item_to_html(item) if item.display?(@guards)
         end.join("\n"), :id => "#{@nav.name}_navigation")
       end
 

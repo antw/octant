@@ -60,4 +60,47 @@ describe 'Item' do
     end
   end
 
+  # --------
+  # display?
+
+  describe 'display?' do
+    context 'when the item does not have a guard' do
+      let(:item) { Octant::Item.make }
+
+      it 'should be displayed when given nil' do
+        item.display?(nil).should be_true
+      end
+
+      it 'should be displayed when given an empty hash' do
+        item.display?({}).should be_true
+      end
+
+      it 'should be displayed when given a guard hash' do
+        item.display?(:no_match => true).should be_true
+      end
+    end
+
+    context 'when the item has a guard' do
+      let(:item) do
+        Octant::Item.make.tap { |i| i.guard = :admin }
+      end
+
+      it 'should not be displayed when given nil' do
+        item.display?(nil).should be_false
+      end
+
+      it 'should not be displayed when given an empty hash' do
+        item.display?({}).should be_false
+      end
+
+      it 'should be displayed when given a matching guard hash' do
+        item.display?(:admin => true).should be_true
+      end
+
+      it 'should not be displayed when given a matching guard hash' do
+        item.display?(:no_match => true).should be_false
+      end
+    end
+  end
+
 end

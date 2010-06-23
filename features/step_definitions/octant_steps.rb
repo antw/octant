@@ -22,7 +22,19 @@ Given %r{^a navigation like$} do |code|
   setup_nav(code)
 end
 
+Given %r{^the "(\w+)" guard is enabled$} do |guard|
+  enable_guard(guard)
+end
+
 # --- RESULTS ----------------------------------------------------------------
+
+Then %r{^I should see the (\w+) item$} do |name|
+  navigation.should have_selector("#nav_#{name}")
+end
+
+Then %r{^I should not see the (\w+) item$} do |name|
+  navigation.should_not have_selector("#nav_#{name}")
+end
 
 Then %r{^the (\w+ item) should have a link element$} do |item|
   item.should have_selector("a")

@@ -16,6 +16,7 @@ module Octant
     def initialize(name, label)
       @name  = name.to_sym
       @label = label.to_s
+      @guard = nil
     end
 
     # Returns the item title (hover tooltip). If no title is set, the label
@@ -25,6 +26,16 @@ module Octant
     #
     def title
       @title or @label
+    end
+
+    # Returns if this item can be displayed.
+    #
+    # @param [Array] Permitted guard conditions.
+    #
+    # @return [String]
+    #
+    def display?(guards = {})
+      @guard.nil? or (guards and guards[@guard])
     end
 
   end # Item

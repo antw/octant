@@ -48,6 +48,20 @@ module Octant
         self
       end
 
+      ##
+      # Sets a guard condition so that the item is only displayed if the
+      # guard is +true+ when the item is rendered.
+      #
+      # @param [Symbol] The guard condition.
+      #
+      # @return [Octant::Builders::Item]
+      #   Returns self.
+      #
+      def guard(guard)
+        @item.guard = guard
+        self
+      end
+
     end # Item
 
   end # Builders

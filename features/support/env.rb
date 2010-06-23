@@ -9,17 +9,26 @@ require 'webrat/core/matchers'
 class OctantWorld
   include Webrat::Matchers
 
+  def initialize(*args, &block)
+    super
+    @formatter_options = {}
+  end
+
+  # Enables a guard condition.
+  def enable_guard(guard)
+    @formatter_options[:guard] ||= {}
+    @formatter_options[:guard][guard.to_sym] = true
+  end
+
   # Sets up the :test navigation instance using the given +code+ string.
   def setup_nav(code)
-    Octant.setup(:test) do |nav|
-      eval(code)
-    end
+    Octant.setup(:test) { |nav| eval(code) }
   end
 
   # Renders the test navigation.
   def navigation
     @rendered_nav ||= Octant::Formatters::Base.new(
-      Octant.get(:test)).to_html
+      Octant.get(:test), @formatter_options).to_html
   end
 end
 
