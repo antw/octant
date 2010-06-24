@@ -14,8 +14,6 @@
 
 ## SYNOPSIS
 
-## Navigation Helpers
-
 Octant is a library for aiding the creation of navigation elements. For
 example:
 
