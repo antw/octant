@@ -32,6 +32,14 @@ class OctantWorld
     Octant.setup(:test) { |nav| eval(code) }
   end
 
+  # Sets the controller/action which should be considered active.
+  def set_location(controller, action)
+    @formatter_options[:location] = {
+      :controller => controller.to_s,
+      :action     => action.to_s
+    }
+  end
+
   # Renders the test navigation.
   def navigation
     @rendered_nav ||= Octant::Formatters::Base.new(

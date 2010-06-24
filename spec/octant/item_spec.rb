@@ -70,6 +70,13 @@ describe 'Item' do
       item.title = 'title'
       item.title.should == 'title'
     end
+
+    describe 'when using content injection' do
+      it 'should return the label when no title is set' do
+        item = Octant::Item.make(:label => "Before %s After")
+        item.title('Middle').should == item.label('Middle')
+      end
+    end
   end
 
   # --------

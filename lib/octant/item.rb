@@ -19,6 +19,14 @@ module Octant
       @guard = nil
     end
 
+    # Two items are equal if they have the same name.
+    #
+    # @return [Boolean]
+    #
+    def ==(other)
+      @name == other.name
+    end
+
     # Returns the item label.
     #
     # @param [String, Array, Hash] inject
@@ -35,10 +43,15 @@ module Octant
     # Returns the item title (hover tooltip). If no title is set, the label
     # will be used intead.
     #
+    # # @param [String, Array, Hash] inject
+    #   An optional array containing (escaped) strings for injection. Ruby 1.9
+    #   users can take advantage of named String#% parameters by supplying
+    #   a hash. This is only used in the event that no explicit title is set.
+    #
     # @return [String]
     #
-    def title
-      @title or @label
+    def title(inject = nil)
+      @title or label(inject)
     end
 
     # Returns if this item can be displayed.

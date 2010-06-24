@@ -12,7 +12,7 @@ module Octant
       # @param [Hash] options
       #   Options used to customise the formatter.
       #
-      def initialize(nav, options)
+      def initialize(nav, options = {})
         @nav = nav
         @guards = options.fetch(:guard, {})
         @inject = options.fetch(:inject, {})
@@ -23,6 +23,9 @@ module Octant
           contents.map! { |v| escape_xml(v) }
           @inject[item_name] = contents
         end
+
+        location = options.fetch(:location, {})
+        @current = nav.active_item(location[:controller], location[:action])
       end
 
       # Transforms the menu given to +initialize+ into a string containing
@@ -69,7 +72,9 @@ module Octant
       # @return [String]
       #
       def html_list_item(item)
-        tag :li, yield, :id => "nav_#{item.name}", :title => item.title
+        tag :li, yield, :id => "nav_#{item.name}",
+          :title => item.title(@inject[item.name]),
+          :class => @current == item ? 'active' : ''
       end
 
       # Returns an anchor element containing a link for the menu item.
@@ -112,8 +117,9 @@ module Octant
           "<#{name}>#{contents}</#{name}>"
         else
           string_attributes = attributes.map do |attr_name, attr_value|
+            next unless attr_value.to_s =~ /\S/ # Skip blanks.
             %(#{attr_name}="#{attr_value}")
-          end.join(' ')
+          end.compact.join(' ')
 
           "<#{name} #{string_attributes}>#{contents}</#{name}>"
         end

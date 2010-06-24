@@ -3,6 +3,7 @@
 require 'octant/builders'
 require 'octant/formatters'
 require 'octant/item'
+require 'octant/item_matcher'
 require 'octant/navigation'
 
 module Octant

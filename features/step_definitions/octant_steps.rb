@@ -30,6 +30,10 @@ Given %r{^I inject "(.*)" into the (\w+) item$} do |content, item_name|
   inject_content(item_name, content)
 end
 
+Given %r{^the user is at "(\w+)/(\w+)"$} do |controller, action|
+  set_location(controller, action)
+end
+
 # --- RESULTS ----------------------------------------------------------------
 
 Then %r{^I should see the (\w+) item$} do |name|
@@ -59,4 +63,12 @@ end
 
 Then %r{^the (\w+ anchor) should link to "(.+)"$} do |anchor, url|
   anchor.should have_selector("[href='#{url}']")
+end
+
+Then %r{^the (\w+ item) should be active$} do |item|
+  item.should have_selector("li[class='active']")
+end
+
+Then %r{^the (\w+ item) should be inactive$} do |item|
+  item.should_not have_selector("li[class='active']")
 end

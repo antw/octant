@@ -10,7 +10,7 @@ Feature: Content injection
       """
       And I inject "2" into the messages item
     Then the messages item contents should be "Messages (2)"
-      And the messages item title should be "Messages (2)"
+      And the messages item should have a title of "Messages (2)"
 
   Scenario: Injecting multiple values
     Given a navigation like
@@ -21,7 +21,7 @@ Feature: Content injection
       And I inject "Inbox" into the messages item
       And I inject "2" into the messages item
     Then the messages item contents should be "Inbox (2)"
-      And the messages item title should be "Inbox (2)"
+      And the messages item should have a title of "Inbox (2)"
 
   Scenario: Injecting a single value when a title is set
     Given a navigation like
@@ -33,7 +33,7 @@ Feature: Content injection
       """
       And I inject "2" into the messages item
     Then the messages item contents should be "Messages (2)"
-      And the messages item title should be "Hello!"
+      And the messages item should have a title of "Hello!"
 
   Scenario: Injecting HTML-unsafe content
     Given a navigation like
@@ -44,4 +44,4 @@ Feature: Content injection
       And I inject "<" into the messages item
     # No escaping would result in the contents being "Messages ("
     Then the messages item contents should be "Messages (<)"
-      And the messages item title should be "Messages (<)"
+      And the messages item should have a title of "Messages (<)"

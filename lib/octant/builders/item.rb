@@ -16,12 +16,12 @@ module Octant
       #   A unique name for the Item instance.
       # @param [String] label
       #   Text which will be used on the item when rendered as HTML.
-      # @param [Octant::Navigation]
-      #   The menu instance to which the item belongs.
+      # @param [Octant::Navigation] nav
+      #   The navigation instance to which the item belongs.
       #
-      def initialize(name, label, menu)
+      def initialize(name, label, nav)
         @item = Octant::Item.new(name, label)
-        @menu = menu
+        @nav  = nav
       end
 
       # Sets a URL to be used for the item.
@@ -59,6 +59,28 @@ module Octant
       #
       def guard(guard)
         @item.guard = guard
+        self
+      end
+
+      # Sets on which controllers and actions the nav item should be
+      # considered to be the active item.
+      #
+      # @param [Array<String>] pairs
+      #   An array of controller/action names.
+      #
+      # @return [Octant::Builders::Item]
+      #   Returns self.
+      #
+      # @example
+      #   # The 'home' tab will be active on any action on the 'home'
+      #   # controller, or the index action of the dashboard controller.
+      #   nav.add(:home, 'Home').active_on('home/*', 'dashboard/index')
+      #
+      def active_on(*pairs)
+        pairs.each do |pair|
+          @nav.add_active_match(pair, @item)
+        end
+
         self
       end
 
