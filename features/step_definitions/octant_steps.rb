@@ -26,6 +26,10 @@ Given %r{^the "(\w+)" guard is enabled$} do |guard|
   enable_guard(guard)
 end
 
+Given %r{^I inject "(.*)" into the (\w+) item$} do |content, item_name|
+  inject_content(item_name, content)
+end
+
 # --- RESULTS ----------------------------------------------------------------
 
 Then %r{^I should see the (\w+) item$} do |name|
@@ -34,6 +38,10 @@ end
 
 Then %r{^I should not see the (\w+) item$} do |name|
   navigation.should_not have_selector("#nav_#{name}")
+end
+
+Then %r{^the (\w+ item) contents should be "(.*)"$} do |item, contents|
+  item.content.should == contents
 end
 
 Then %r{^the (\w+ item) should have a link element$} do |item|

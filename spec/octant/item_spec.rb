@@ -27,6 +27,18 @@ describe 'Item' do
     it 'should typecast the argument to a symbol' do
       Octant::Item.make(:label => :label).label.should == 'label'
     end
+
+    describe 'when using content injection' do
+      let(:item) { Octant::Item.make(:label => "Before %s After") }
+
+      it 'should add the injected content when given as a String' do
+        item.label("Middle").should == "Before Middle After"
+      end
+
+      it 'should add the injected content when given an an Array' do
+        item.label(["Middle"]).should == "Before Middle After"
+      end
+    end
   end
 
   # ---

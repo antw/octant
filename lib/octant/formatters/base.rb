@@ -15,6 +15,14 @@ module Octant
       def initialize(nav, options)
         @nav = nav
         @guards = options.fetch(:guard, {})
+        @inject = options.fetch(:inject, {})
+
+        # Escape injected content.
+        @inject.each do |item_name, contents|
+          contents = Array(contents)
+          contents.map! { |v| escape_xml(v) }
+          @inject[item_name] = contents
+        end
       end
 
       # Transforms the menu given to +initialize+ into a string containing
@@ -41,11 +49,13 @@ module Octant
       #   A string containing an HTML list element.
       #
       def trasform_item_to_html(item)
+        label = item.label(@inject[item.name])
+
         html_list_item(item) do
           if item.url
-            html_link(item) { item.label }
+            html_link(item) { label }
           else
-            item.label  # Don't add an anchor element if no URL is set.
+            label  # Don't add an anchor element if no URL is set.
           end
         end
       end
@@ -107,6 +117,22 @@ module Octant
 
           "<#{name} #{string_attributes}>#{contents}</#{name}>"
         end
+      end
+
+      ESCAPE_TABLE = {
+        '&' => '&amp;',
+        '<' => '&lt;',
+        '>' => '&gt;',
+        '"' => '&quot;',
+        "'" => '&#039;',
+      }
+
+      # Escapes content such that it can be safely used in HTML.
+      #
+      # Taken from Erubis (MIT licensed).
+      #
+      def escape_xml(value)
+        value.to_s.gsub(/[&<>"']/) { |s| ESCAPE_TABLE[s] }   # or /[&<>"']/
       end
 
     end # Base

@@ -20,6 +20,13 @@ class OctantWorld
     @formatter_options[:guard][guard.to_sym] = true
   end
 
+  # Adds content to be injected into a navigation item.
+  def inject_content(item, contents)
+    @formatter_options[:inject] ||= {}
+    @formatter_options[:inject][item.to_sym] ||= []
+    @formatter_options[:inject][item.to_sym] << contents
+  end
+
   # Sets up the :test navigation instance using the given +code+ string.
   def setup_nav(code)
     Octant.setup(:test) { |nav| eval(code) }

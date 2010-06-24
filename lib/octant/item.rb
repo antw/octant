@@ -4,7 +4,7 @@ module Octant
   # Represents a single item in a navigation menu.
   class Item
 
-    attr_reader   :name, :label
+    attr_reader   :name
     attr_accessor :resource, :guard, :url
     attr_writer   :title
 
@@ -17,6 +17,19 @@ module Octant
       @name  = name.to_sym
       @label = label.to_s
       @guard = nil
+    end
+
+    # Returns the item label.
+    #
+    # @param [String, Array, Hash] inject
+    #   An optional array containing (escaped) strings for injection. Ruby 1.9
+    #   users can take advantage of named String#% parameters by supplying
+    #   a hash.
+    #
+    # @return [String]
+    #
+    def label(inject = nil)
+      inject ? @label % inject : @label
     end
 
     # Returns the item title (hover tooltip). If no title is set, the label
