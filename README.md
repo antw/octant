@@ -81,7 +81,7 @@ action; this can be done with the "inject" option.
 
 The `inject` option expects a hash -- with each key matching an item in the
 menu into which you wish to add content, and a value which is provided to
-String#%.
+`String#%`.
 
     <ul>
       <li id="nav_comments" title="Comments">
@@ -92,7 +92,7 @@ String#%.
       </li>
     </ul>
 
-Ruby 1.9 users can take advantage of names String#% parameters:
+Ruby 1.9 users can take advantage of named `String#%` parameters:
 
     Octant.setup(:stuff) do |menu|
       menu.add(:profile, '%(name) (%(message_count))') do |item|
