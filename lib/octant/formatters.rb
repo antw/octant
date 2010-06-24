@@ -7,4 +7,4 @@ module Octant
 end
 
 require 'octant/formatters/base'
-# require 'octant/formatters/html5'
+require 'octant/formatters/html5'

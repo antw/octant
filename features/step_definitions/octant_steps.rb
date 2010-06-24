@@ -34,6 +34,13 @@ Given %r{^the user is at "(\w+)/(\w+)"$} do |controller, action|
   set_location(controller, action)
 end
 
+Given %r{^I use the (.+) formatter$} do |formatter_name|
+  case formatter_name
+    when 'base'  then use_formatter(Octant::Formatters::Base)
+    when 'HTML5' then use_formatter(Octant::Formatters::HTML5)
+  end
+end
+
 # --- RESULTS ----------------------------------------------------------------
 
 Then %r{^I should see the (\w+) item$} do |name|
@@ -71,4 +78,8 @@ end
 
 Then %r{^the (\w+ item) should be inactive$} do |item|
   item.should_not have_selector("li[class='active']")
+end
+
+Then %r{^the navigation should have an? "(.+)" element$} do |el|
+  navigation.should have_selector(el)
 end

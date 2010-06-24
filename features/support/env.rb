@@ -11,6 +11,7 @@ class OctantWorld
 
   def initialize(*args, &block)
     super
+    @formatter = Octant::Formatters::Base
     @formatter_options = {}
   end
 
@@ -40,9 +41,14 @@ class OctantWorld
     }
   end
 
+  # Sets which formatter to use.
+  def use_formatter(formatter)
+    @formatter = formatter
+  end
+
   # Renders the test navigation.
   def navigation
-    @rendered_nav ||= Octant::Formatters::Base.new(
+    @rendered_nav ||= @formatter.new(
       Octant.get(:test), @formatter_options).to_html
   end
 end
