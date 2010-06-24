@@ -39,3 +39,26 @@ Feature: Active items
       | index   | active   |
       | show    | active   |
       | destroy | inactive |
+
+  Scenario Outline: When an passing multiple paths to active_on
+    Given a navigation like
+      """
+      nav.add(:messages, "Messages") do |item|
+        item.active_on "messages/{index,show}", "notices/*"
+      end
+
+      nav.add(:calendar, "Calendar") do |item|
+        item.active_on "calendar/"
+      end
+
+      """
+    When the user is at "<controller>/<action>"
+    Then the messages item should be <state>
+      And the calendar item should be inactive
+
+    Examples:
+      | controller | action  | state    |
+      | messages   | index   | active   |
+      | messages   | show    | active   |
+      | notices    | blah    | active   |
+      | messages   | destroy | inactive |
