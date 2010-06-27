@@ -18,14 +18,14 @@ Octant is a library for aiding the creation of navigation elements. For
 example:
 
     <ul>
-      <li id="nav_home" class="active">
-        <a href="/" title="Return to the home page">Home</a>
+      <li id="nav_home" title="Return to the home page" class="active">
+        <a href="/">Home</a>
       </li>
-      <li id="nav_products">
-        <a href="/products" title="Products">Products</a>
+      <li id="nav_products" title="Products">
+        <a href="/products">Products</a>
       </li>
-      <li id="nav_contact">
-        <a href="/contact" title="Contact Us">Contact Us</a>
+      <li id="nav_contact" title="Contact Us">
+        <a href="/contact">Contact Us</a>
       </li>
     </ul>
 
@@ -132,8 +132,8 @@ items which use the `admin` guard condition).
     display_navigation :stuff, :guards => { :admin => true }
 
     <ul>
-      <li id="nav_home">
-        <a href="/" title="Home">Home</a>
+      <li id="nav_home" title="Home">
+        <a href="/">Home</a>
       </li>
       <li id="nav_settings" title="Settings">
         <a href="/settings">Settings</a>
