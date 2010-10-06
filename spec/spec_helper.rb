@@ -6,7 +6,6 @@ require 'octant'
 
 require 'rubygems'
 require 'rspec/core'
-require 'rspec/autorun'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
