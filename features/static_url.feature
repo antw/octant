@@ -9,6 +9,7 @@ Feature: Static, string-based URLs
 
       """
     Then the home item should not have a link element
+      And the home item should be disabled
 
   Scenario: When a URL is set
     Given a navigation like
@@ -20,3 +21,4 @@ Feature: Static, string-based URLs
       """
     Then the home item should have a link element
       And the home anchor should link to "/"
+      And the home item should not be disabled

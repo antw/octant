@@ -83,3 +83,11 @@ end
 Then %r{^the navigation should have an? "(.+)" element$} do |el|
   navigation.should have_selector(el)
 end
+
+Then %r{^the (\w+ item) should be disabled$} do |item|
+  item.should have_selector("span.disabled")
+end
+
+Then %r{^the (\w+ item) should not be disabled$} do |item|
+  item.should_not have_selector("span.disabled")
+end

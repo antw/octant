@@ -58,7 +58,8 @@ module Octant
           if item.url
             html_link(item) { label }
           else
-            label  # Don't add an anchor element if no URL is set.
+            # Don't add an anchor element if no URL is set.
+            tag :span, label, :class => 'disabled'
           end
         end
       end
