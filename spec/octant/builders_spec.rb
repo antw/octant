@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-context 'Building a navigation with a three, simple items' do
+describe 'Building a navigation with a three, simple items' do
   before(:all) do
     @nav = Octant.setup(:test) do |nav|
       nav.add(:one, 'One')
