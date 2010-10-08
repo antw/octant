@@ -14,7 +14,7 @@ module Octant
       def to_html
         tag(:nav,
           tag(:menu, @nav.items.map do |item|
-            trasform_item_to_html(item) if item.display?(@guards)
+            transform_item_to_html(item) if item.display?(@guards)
           end.join("\n"), :id => "#{@nav.name}_navigation", :type => "list"))
       end
 

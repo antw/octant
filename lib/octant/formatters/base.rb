@@ -37,7 +37,7 @@ module Octant
       #
       def to_html
         tag(:ul, @nav.items.map do |item|
-          trasform_item_to_html(item) if item.display?(@guards)
+          transform_item_to_html(item) if item.display?(@guards)
         end.join("\n"), :id => "#{@nav.name}_navigation")
       end
 
@@ -51,7 +51,7 @@ module Octant
       # @return [String]
       #   A string containing an HTML list element.
       #
-      def trasform_item_to_html(item)
+      def transform_item_to_html(item)
         label = item.label(@inject[item.name])
 
         html_list_item(item) do
